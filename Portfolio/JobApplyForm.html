@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Job Title</title>
+    <link rel="stylesheet" href="style1.css">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div class="container">
+        <h1>求人応募管理</h1>
+        <div class="input-area">
+            <input type="text" id="company" placeholder="会社名">
+            <input type="text" id="position" placeholder="ポジション">
+            <select id="status">
+                <option value="応募済み">応募済み</option>
+                <option value="面接予定">面接予定</option>
+                <option value="内定">内定</option>
+                <option value="不採用">不採用</option>
+            </select>
+            <button id="addButton">追加</button>
+        </div>
+        <ul id="joblist"></ul>
+    </div>
+    <script src="script1.js"></script>
+
+</body>
+
+</html>
