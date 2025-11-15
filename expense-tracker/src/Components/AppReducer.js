@@ -3,7 +3,7 @@ export default (state, action) => {
         case 'DELETE_TRANSACTION':
             return {
                 ...state,
-                transaction: state.transactions.filter(tx => tx.id !== action.payload)
+                transactions: state.transactions.filter(tx => tx.id !== action.payload)
             };
             case 'ADD_TRANSACTION':
                 return {
