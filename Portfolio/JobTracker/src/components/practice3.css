@@ -1,0 +1,52 @@
+.job-card {
+    background: #fff;
+    padding: 16px;
+    border-radius: 10px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    margin-bottom: 12px;
+    transition: transform 0.2s ease;
+}
+
+.job-card:hover {
+    transform: translateY(-4px);
+}
+
+.job-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+}
+
+.company-name {
+    font-size: 14px;
+    color: #555;
+}
+
+.status-badge {
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 12px;
+    color: white;
+    text-transform: capitalize;
+}
+
+.status-badge.saved {
+    background-color: #6c757d;
+}
+
+.status-badge.applied {
+    background-color: #007bff;
+}
+
+.status-badge.interview {
+    background-color: #ffc107;
+}
+
+.status-badge.offer {
+    background-color: #28a745;
+}
+
+.sstatus-badge.rejected {
+    background-color: #dc3545;
+}
