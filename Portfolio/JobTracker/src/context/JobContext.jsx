@@ -2,25 +2,41 @@ import { createContext, useContext, useSTate } from 'react';
 
 const JobsContext = createContext();
 
-export function JobListPage() {
+export function JobProvider({ children }) {
   const [jobs, setJobs] = useState([
-    { id: '1', company: 'Malta Corp', position: 'Frontend engineer', status:'saved'},
-    { id: '2', company: 'Tech Malta', position: 'Software engineer', status:'applied'},
+    // { id: '1', company: 'Malta Corp', position: 'Frontend engineer', status:'saved'},
+    // { id: '2', company: 'Tech Malta', position: 'Software engineer', status:'applied'},
   ]);
 
-    const addJob = (company, position, status) => {
-    const newJob = {
-      id: Date.now().toString(),
-      company,
-      position,
-      status,
+    const addJob = (job) => {
+        setJobs((prev) => [...prev, job])
     };
-    setJobs([...jobs, newJobs]);
-    };
+    // const newJob = {
+    //   id: Date.now().toString(),
+    //   company,
+    //   position,
+    //   status,
+    // };
+    // setJobs([...jobs, newJobs]);
+    // };
+
+    const updateStatus = (jobId, newStatus) => {
+        setJobs((prev) => 
+        prev.map((job) =>
+        job.id === jobId ? {...job, status: newStatus } : job
+    )
+  );
+};
+
+const removeJob = (jobId) => {
+    setJobs((prev) => prev.filter((job) => job.id !== jobId));
+};
 
     return (
-        <JobsContext.Provider value={{jobs, addJob }}>
-            {children}
+        <JobsContext.Provider 
+        value={{jobs, addJob, updateJobStatus, removeJob }}
+        >
+          {children}
         </JobsContext.Provider>
     );
 }
