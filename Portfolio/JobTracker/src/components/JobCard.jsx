@@ -9,6 +9,7 @@ function JobCard({ job }) {
       <h3>{job.position}</h3>
       <p className="company-name">{job.company}</p>
 
+      <p className='job-date'>Applied on: {job.date}</p>
       <span className={`status ${job.status}`}>{job.status}</span>
 
       <div className="job-card-actions">
