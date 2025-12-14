@@ -1,37 +1,46 @@
 // context/JobContext.jsx
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useState, useEffect } from "react";
 
 const JobsContext = createContext();
 
+
 export function JobsProvider({ children }) {
-  const [jobs, setJobs] = useState([
+  const [jobs, setJobs] = useState(() => {
+    const savedJobs = localStorage.getItem('jobs');
+    return savedJobs? JSON.parse(savedJobs)
+    : [
     { id: "1", company: "Malta Corp", position: "Frontend Engineer", status: "saved" },
     { id: "2", company: "Tech Malta", position: "Software Engineer", status: "applied" },
-  ]);
+  ]
+  });
 
-  const addJob = (job) => {
-    setJobs((prev) => [...prev, job]);
-  };
+  useEffect(() => {
+    localStorage.setItem('jobs', JSON.stringify(jobs));
+  }, [jobs]);
 
-  const updateJobStatus = (jobId, newStatus) => {
-    setJobs((prev) =>
-      prev.map((job) =>
-        job.id === jobId ? { ...job, status: newStatus } : job
-      )
-    );
-  };
+//   const addJob = (job) => {
+//     setJobs((prev) => [...prev, job]);
+//   };
 
-  const removeJob = (jobId) => {
-    setJobs((prev) => prev.filter((job) => job.id !== jobId));
-  };
+//   const updateJobStatus = (jobId, newStatus) => {
+//     setJobs((prev) =>
+//       prev.map((job) =>
+//         job.id === jobId ? { ...job, status: newStatus } : job
+//       )
+//     );
+//   };
 
-  return (
-    <JobsContext.Provider value={{ jobs, addJob, updateJobStatus, removeJob }}>
-      {children}
-    </JobsContext.Provider>
-  );
-}
+//   const removeJob = (jobId) => {
+//     setJobs((prev) => prev.filter((job) => job.id !== jobId));
+//   };
 
-export function useJobs() {
-  return useContext(JobsContext);
-}
+//   return (
+//     <JobsContext.Provider value={{ jobs, addJob, updateJobStatus, removeJob }}>
+//       {children}
+//     </JobsContext.Provider>
+//   );
+// }
+
+// export function useJobs() {
+//   return useContext(JobsContext);
+// }
