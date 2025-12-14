@@ -1,46 +1,37 @@
-import { createContext, useContext, useSTate } from 'react';
+// context/JobContext.jsx
+import { createContext, useContext, useState } from "react";
 
 const JobsContext = createContext();
 
-export function JobProvider({ children }) {
+export function JobsProvider({ children }) {
   const [jobs, setJobs] = useState([
-    // { id: '1', company: 'Malta Corp', position: 'Frontend engineer', status:'saved'},
-    // { id: '2', company: 'Tech Malta', position: 'Software engineer', status:'applied'},
+    { id: "1", company: "Malta Corp", position: "Frontend Engineer", status: "saved" },
+    { id: "2", company: "Tech Malta", position: "Software Engineer", status: "applied" },
   ]);
 
-    const addJob = (job) => {
-        setJobs((prev) => [...prev, job])
-    };
-    // const newJob = {
-    //   id: Date.now().toString(),
-    //   company,
-    //   position,
-    //   status,
-    // };
-    // setJobs([...jobs, newJobs]);
-    // };
+  const addJob = (job) => {
+    setJobs((prev) => [...prev, job]);
+  };
 
-    const updateStatus = (jobId, newStatus) => {
-        setJobs((prev) => 
-        prev.map((job) =>
-        job.id === jobId ? {...job, status: newStatus } : job
-    )
-  );
-};
-
-const removeJob = (jobId) => {
-    setJobs((prev) => prev.filter((job) => job.id !== jobId));
-};
-
-    return (
-        <JobsContext.Provider 
-        value={{jobs, addJob, updateJobStatus, removeJob }}
-        >
-          {children}
-        </JobsContext.Provider>
+  const updateJobStatus = (jobId, newStatus) => {
+    setJobs((prev) =>
+      prev.map((job) =>
+        job.id === jobId ? { ...job, status: newStatus } : job
+      )
     );
+  };
+
+  const removeJob = (jobId) => {
+    setJobs((prev) => prev.filter((job) => job.id !== jobId));
+  };
+
+  return (
+    <JobsContext.Provider value={{ jobs, addJob, updateJobStatus, removeJob }}>
+      {children}
+    </JobsContext.Provider>
+  );
 }
 
 export function useJobs() {
-    return useContext(JobContext);
+  return useContext(JobsContext);
 }
