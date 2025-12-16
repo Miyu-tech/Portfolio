@@ -4,6 +4,7 @@ import "./AddJobForm.css"; // 必要なら
 
 function AddJobForm() {
   const { addJob } = useJobs();
+  const [date, setDate] = useState('');
 
   const [company, setCompany] = useState("");
   const [position, setPosition] = useState("");
@@ -17,6 +18,7 @@ function AddJobForm() {
       company,
       position,
       status,
+      date,
     };
 
     addJob(newJob);
@@ -24,10 +26,19 @@ function AddJobForm() {
     setCompany("");
     setPosition("");
     setStatus("saved");
+    setDate("");
   };
 
   return (
     <form onSubmit={handleSubmit} className="job-form">
+
+      <input 
+      type="date" 
+      value={date} 
+      onChange={(e) => setDate(e.target.value)}
+      required 
+      />
+
       <input
         type="text"
         placeholder="Company"
